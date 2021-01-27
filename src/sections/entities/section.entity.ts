@@ -1,3 +1,4 @@
+import { Course } from 'src/courses/entities/course.entity';
 import { Lesson } from 'src/lessons/entities/lesson.entity';
 import {
   Entity,
@@ -5,6 +6,7 @@ import {
   Column,
   OneToMany,
   PrimaryGeneratedColumn,
+  ManyToOne,
 } from 'typeorm';
 
 @Entity()
@@ -18,6 +20,25 @@ export class Section extends BaseEntity {
   @Column()
   order: number;
 
-  @OneToMany((type) => Lesson, (lesson) => lesson.section, { eager: true })
+  @OneToMany(() => Lesson, (lesson) => lesson.section, { eager: true })
   lessons: Lesson[];
+
+  @ManyToOne(() => Course, (course) => course.sections, { eager: false })
+  course: Course;
+
+  @Column()
+  courseId: number;
+
+  /**
+   *
+   */
+  constructor(params) {
+    super();
+
+    const { title, order, courseId } = params || {};
+
+    this.title = title;
+    this.order = order;
+    this.courseId = courseId;
+  }
 }

@@ -21,8 +21,11 @@ export class Lesson extends BaseEntity {
   @Column()
   order: number;
 
-  @ManyToOne((type) => Section, (section) => section.lessons, { eager: false })
+  @ManyToOne(() => Section, (section) => section.lessons, { eager: false })
   section: Section;
+
+  @Column()
+  sectionId: number;
 
   constructor(params) {
     const { title, url, order } = params || {};
