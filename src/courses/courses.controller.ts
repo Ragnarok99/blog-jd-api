@@ -9,6 +9,7 @@ import {
 } from '@nestjs/common';
 import { CoursesService } from './courses.service';
 import { CreateCourseDto } from './dto/create-course.dto';
+import { GetCoursesParamsDto } from './dto/get-courses-params.dto';
 import { UpdateCourseDto } from './dto/update-course.dto';
 import { Course } from './entities/course.entity';
 
@@ -22,8 +23,10 @@ export class CoursesController {
   }
 
   @Get()
-  findAll(): Promise<Course[]> {
-    return this.coursesService.findAll();
+  findAll(
+    @Param() getCoursesParamsDto: GetCoursesParamsDto,
+  ): Promise<Course[]> {
+    return this.coursesService.findAll(getCoursesParamsDto);
   }
 
   @Get(':id')

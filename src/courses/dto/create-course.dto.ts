@@ -5,4 +5,5 @@ export class CreateCourseDto {
   author: string;
   imageUrl: string;
   categoryId: number;
+  slug: string;
 }

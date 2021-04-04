@@ -38,13 +38,16 @@ export class Course extends BaseEntity {
   @Column()
   categoryId: number;
 
+  @Column()
+  slug: string;
+
   /**
    *
    */
   constructor(params) {
     super();
 
-    const { title, description, rate, author, imageUrl, categoryId } =
+    const { title, description, rate, author, imageUrl, categoryId, slug } =
       params || {};
     this.title = title;
     this.description = description;
@@ -52,5 +55,6 @@ export class Course extends BaseEntity {
     this.author = author;
     this.imageUrl = imageUrl;
     this.categoryId = categoryId;
+    this.slug = slug;
   }
 }
