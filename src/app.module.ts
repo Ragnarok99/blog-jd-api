@@ -7,15 +7,23 @@ import { LessonsModule } from './lessons/lessons.module';
 import { SectionsModule } from './sections/sections.module';
 import { CoursesModule } from './courses/courses.module';
 import { CategoriesModule } from './categories/categories.module';
+import { DatabaseConfig } from './config/database.config';
 
 @Module({
   imports: [
-    TypeOrmModule.forRoot(typeOrmConfig),
+    ConfigModule.forRoot({
+      load: [typeOrmConfig],
+      isGlobal: true,
+      // envFilePath: '.development.env',
+    }),
     LessonsModule,
     SectionsModule,
     CoursesModule,
     CategoriesModule,
-    ConfigModule.forRoot(),
+    TypeOrmModule.forRootAsync({
+      imports: [ConfigModule],
+      useClass: DatabaseConfig,
+    }),
   ],
 })
 export class AppModule {}
