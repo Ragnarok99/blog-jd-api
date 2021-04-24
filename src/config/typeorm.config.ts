@@ -13,5 +13,7 @@ export function typeOrmConfig() {
   };
   return {
     database: typeOrmConfigDB,
+    PORT: process.env.PORT,
+    WEBSITE_URL: process.env.WEBSITE_URL,
   };
 }
