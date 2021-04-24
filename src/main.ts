@@ -5,10 +5,10 @@ import { AppModule } from './app.module';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   const configService = app.get(ConfigService);
-  const WEBSITE_URL = configService.get('WEBSITE_URL');
+  const ALLOWED_URLS = configService.get('ALLOWED_URLS');
 
   app.enableCors({
-    origin: [WEBSITE_URL],
+    origin: JSON.parse(ALLOWED_URLS),
   });
 
   const PORT = configService.get('PORT');
