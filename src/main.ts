@@ -6,6 +6,7 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   const configService = app.get(ConfigService);
   const ALLOWED_URLS = configService.get('ALLOWED_URLS');
+  console.log(ALLOWED_URLS);
 
   app.enableCors({
     origin: JSON.parse(ALLOWED_URLS),
