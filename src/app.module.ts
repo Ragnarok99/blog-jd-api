@@ -8,13 +8,15 @@ import { SectionsModule } from './sections/sections.module';
 import { CoursesModule } from './courses/courses.module';
 import { CategoriesModule } from './categories/categories.module';
 import { DatabaseConfig } from './config/database.config';
+import { InstructorsModule } from './instructors/instructors.module';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       load: [typeOrmConfig],
       isGlobal: true,
-      // envFilePath: '.development.env',
+      envFilePath:
+        process.env.NODE_ENV === 'development' ? '.development.env' : '.env',
     }),
     LessonsModule,
     SectionsModule,
@@ -24,6 +26,7 @@ import { DatabaseConfig } from './config/database.config';
       imports: [ConfigModule],
       useClass: DatabaseConfig,
     }),
+    InstructorsModule,
   ],
 })
 export class AppModule {}

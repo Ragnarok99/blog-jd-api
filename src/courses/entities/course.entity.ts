@@ -1,4 +1,5 @@
 import { Category } from 'src/categories/entities/category.entity';
+import { Instructor } from 'src/instructors/entities/instructor.entity';
 import { Section } from 'src/sections/entities/section.entity';
 import {
   BaseEntity,
@@ -40,6 +41,9 @@ export class Course extends BaseEntity {
 
   @Column()
   slug: string;
+
+  @ManyToOne(() => Instructor, (instructor) => instructor.courses)
+  instructor: Instructor;
 
   /**
    *

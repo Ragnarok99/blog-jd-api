@@ -10,9 +10,12 @@ export function typeOrmConfig() {
     database: process.env.POSTGRES_DB_NAME,
     entities: [__dirname + '/../**/*.entity.{js,ts}'],
     synchronize: true,
-    ssl: {
-      rejectUnauthorized: false,
-    },
+    ssl:
+      process.env.NODE_ENV === 'development'
+        ? null
+        : {
+            rejectUnauthorized: false,
+          },
   };
   return {
     database: typeOrmConfigDB,
