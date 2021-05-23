@@ -33,7 +33,7 @@ export class Course extends BaseEntity {
   @OneToMany(() => Section, (section) => section.course, { eager: true })
   sections: Section[];
 
-  @ManyToOne((_) => Category, (category) => category.courses)
+  @ManyToOne((_) => Category, (category) => category.courses, { eager: true })
   category: Category;
 
   @Column()
@@ -42,8 +42,13 @@ export class Course extends BaseEntity {
   @Column()
   slug: string;
 
-  @ManyToOne(() => Instructor, (instructor) => instructor.courses)
+  @ManyToOne(() => Instructor, (instructor) => instructor.courses, {
+    eager: true,
+  })
   instructor: Instructor;
+
+  @Column()
+  instructorId: string;
 
   /**
    *

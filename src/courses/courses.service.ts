@@ -19,7 +19,9 @@ export class CoursesService {
     return this.coursesRepository.createCourse(createCourseDto);
   }
 
-  async findAll(getCoursesParamsDto: GetCoursesParamsDto): Promise<Course[]> {
+  async findAll(
+    getCoursesParamsDto: GetCoursesParamsDto,
+  ): Promise<[Course[], number]> {
     return await this.coursesRepository.getCourses(getCoursesParamsDto);
   }
 

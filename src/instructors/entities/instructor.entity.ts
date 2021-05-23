@@ -24,6 +24,6 @@ export class Instructor extends BaseEntity {
   @Column()
   students: number;
 
-  @OneToMany(() => Course, (course) => course.instructor, { eager: true })
+  @OneToMany(() => Course, (course) => course.instructor)
   courses: Course[];
 }

@@ -25,7 +25,7 @@ export class CoursesController {
   @Get()
   findAll(
     @Param() getCoursesParamsDto: GetCoursesParamsDto,
-  ): Promise<Course[]> {
+  ): Promise<[Course[], number]> {
     return this.coursesService.findAll(getCoursesParamsDto);
   }
 

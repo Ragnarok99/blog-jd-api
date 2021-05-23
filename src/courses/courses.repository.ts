@@ -14,11 +14,14 @@ export class CoursesRepository extends Repository<Course> {
 
   async getCourses(
     getCoursesParamsDto: GetCoursesParamsDto,
-  ): Promise<Course[]> {
-    // const query = this.createQueryBuilder('course');
+  ): Promise<[Course[], number]> {
+    const { skip = 0, limit = 0 } = getCoursesParamsDto;
+    console.log({ limit });
+    const query = this.createQueryBuilder('course');
 
-    // return await query.getMany();
+    query.take(limit);
+    query.skip(skip);
 
-    return await Course.find();
+    return await query.getManyAndCount();
   }
 }
