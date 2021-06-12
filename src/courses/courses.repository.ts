@@ -6,7 +6,7 @@ import { Course } from './entities/course.entity';
 @EntityRepository(Course)
 export class CoursesRepository extends Repository<Course> {
   async createCourse(createCourseDto: CreateCourseDto): Promise<Course> {
-    const course = new Course(createCourseDto);
+    const course = Course.create(createCourseDto);
     await course.save();
 
     return course;
@@ -16,12 +16,12 @@ export class CoursesRepository extends Repository<Course> {
     getCoursesParamsDto: GetCoursesParamsDto,
   ): Promise<[Course[], number]> {
     const { skip = 0, limit = 0 } = getCoursesParamsDto;
-    console.log({ limit });
-    const query = this.createQueryBuilder('course');
+    const query = await this.findAndCount({
+      take: limit,
+      skip,
+      relations: ['sections', 'category', 'user'],
+    });
 
-    query.take(limit);
-    query.skip(skip);
-
-    return await query.getManyAndCount();
+    return query;
   }
 }

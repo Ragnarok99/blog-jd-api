@@ -1,6 +1,7 @@
 import { Category } from 'src/categories/entities/category.entity';
-import { Instructor } from 'src/instructors/entities/instructor.entity';
+
 import { Section } from 'src/sections/entities/section.entity';
+import { User } from 'src/users/entities/user.entity';
 import {
   BaseEntity,
   Column,
@@ -30,10 +31,10 @@ export class Course extends BaseEntity {
   @Column()
   imageUrl: string;
 
-  @OneToMany(() => Section, (section) => section.course, { eager: true })
+  @OneToMany(() => Section, (section) => section.course)
   sections: Section[];
 
-  @ManyToOne((_) => Category, (category) => category.courses, { eager: true })
+  @ManyToOne((_) => Category, (category) => category.courses)
   category: Category;
 
   @Column()
@@ -42,28 +43,6 @@ export class Course extends BaseEntity {
   @Column()
   slug: string;
 
-  @ManyToOne(() => Instructor, (instructor) => instructor.courses, {
-    eager: true,
-  })
-  instructor: Instructor;
-
-  @Column()
-  instructorId: string;
-
-  /**
-   *
-   */
-  constructor(params) {
-    super();
-
-    const { title, description, rate, author, imageUrl, categoryId, slug } =
-      params || {};
-    this.title = title;
-    this.description = description;
-    this.rate = rate;
-    this.author = author;
-    this.imageUrl = imageUrl;
-    this.categoryId = categoryId;
-    this.slug = slug;
-  }
+  @ManyToOne(() => User, (user) => user.courses)
+  user: User;
 }

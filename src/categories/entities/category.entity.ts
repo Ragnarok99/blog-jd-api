@@ -9,7 +9,7 @@ import {
 
 @Entity()
 export class Category extends BaseEntity {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn('increment')
   id: number;
 
   @Column()

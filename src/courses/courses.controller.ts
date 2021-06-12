@@ -6,7 +6,9 @@ import {
   Put,
   Param,
   Delete,
+  UseGuards,
 } from '@nestjs/common';
+import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { CoursesService } from './courses.service';
 import { CreateCourseDto } from './dto/create-course.dto';
 import { GetCoursesParamsDto } from './dto/get-courses-params.dto';
@@ -22,6 +24,7 @@ export class CoursesController {
     return this.coursesService.create(createCourseDto);
   }
 
+  // @UseGuards(JwtAuthGuard)
   @Get()
   findAll(
     @Param() getCoursesParamsDto: GetCoursesParamsDto,

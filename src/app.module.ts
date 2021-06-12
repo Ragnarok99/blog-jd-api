@@ -8,7 +8,6 @@ import { SectionsModule } from './sections/sections.module';
 import { CoursesModule } from './courses/courses.module';
 import { CategoriesModule } from './categories/categories.module';
 import { DatabaseConfig } from './config/database.config';
-import { InstructorsModule } from './instructors/instructors.module';
 import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
 
@@ -28,7 +27,6 @@ import { UsersModule } from './users/users.module';
       imports: [ConfigModule],
       useClass: DatabaseConfig,
     }),
-    InstructorsModule,
     AuthModule,
     UsersModule,
   ],
